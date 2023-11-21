@@ -1,15 +1,19 @@
 import { api } from '@/data/api'
 import { Product } from '@/data/types/product'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
 async function getFeaturedProducts(): Promise<Product[]> {
   return api('/products/featured', {
-    cache: 'force-cache',
     next: {
       revalidate: 60 * 60,
     },
   })
+}
+
+export const metadata: Metadata = {
+  title: 'Home',
 }
 
 export default async function Home() {
