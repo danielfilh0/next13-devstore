@@ -4,7 +4,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 async function getFeaturedProducts(): Promise<Product[]> {
-  return api('/products/featured')
+  return api('/products/featured', {
+    cache: 'force-cache',
+    next: {
+      revalidate: 60 * 60,
+    },
+  })
 }
 
 export default async function Home() {
